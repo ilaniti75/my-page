@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The psychological barrier to building a website | Ilanit Izhar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600&family=Nunito:wght@400;600&family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@400;600&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .article-page {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem 0 4rem;
+    }
+
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+
+    .article-back:hover {
+      color: var(--text);
+    }
+
+    .article-header {
+      margin-bottom: 3rem;
+    }
+
+    .article-header h1 {
+      font-size: 2.2rem;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .article-byline {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .article-cover {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 3rem;
+    }
+
+    .article-body p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .article-body h2 {
+      font-size: 1.6rem;
+      margin-top: 3rem;
+      margin-bottom: 1.2rem;
+      color: var(--title);
+    }
+
+    .article-body h3 {
+      font-size: 1.25rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--title);
+    }
+
+    .article-body blockquote {
+      border-left: 3px solid var(--title);
+      padding-left: 1.25rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    .article-body blockquote p {
+      margin-bottom: 0.5rem;
+    }
+
+    .article-body .tip-number {
+      display: inline-block;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--title);
+      margin-right: 0.3rem;
+    }
+
+    .article-body ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .article-body ul li {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      margin-bottom: 0.5rem;
+    }
+
+    .article-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .article-footer a {
+      color: var(--title);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+
+    .article-footer a:hover {
+      color: var(--link-hover);
+    }
+
+    @media (max-width: 768px) {
+      .article-page {
+        padding: 1rem 0 3rem;
+      }
+
+      .article-header h1 {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav-bar">
+    <a href="index.html">Home</a>
+    <a href="index.html#articles">Articles</a>
+    <a href="index.html#contact">Contact</a>
+    <div class="theme-panel-wrapper">
+      <button class="theme-toggle" id="theme-toggle" title="Change theme">&#127912;</button>
+      <div class="theme-panel" id="theme-panel"></div>
+    </div>
+  </nav>
+
+  <div class="article-page">
+    <a href="index.html" class="article-back">&larr; Back to portfolio</a>
+
+    <header class="article-header">
+      <h1>The psychological barrier to building a website (and 6 AI tips to break it)</h1>
+      <p class="article-byline">By Ilanit Izhar</p>
+    </header>
+
+    <img class="article-cover" src="media/fc2532_8f510f0530d548c6889fca496eeb2dd0~mv2.avif" alt="Article cover image">
+
+    <div class="article-body">
+      <p>I've got this very creative friend. She builds beautiful presentations in minutes. Designs social posts effortlessly. And has strong taste and clear opinions about how things should look and feel.</p>
+
+      <p>But when it comes to her own website, something changes.</p>
+
+      <p>She'll text me:</p>
+
+      <blockquote>
+        <p>"Can you just move this button for me?"</p>
+        <p>"I'm scared I'll break something."</p>
+        <p>"I don't know if this looks professional."</p>
+      </blockquote>
+
+      <p>It's easy to assume it's a skills issue. And part of it is. Creating a website does require decisions&mdash;about layout, hierarchy, tone and structure. But as a UX professional, I know that's not the whole story.</p>
+
+      <p>Some years ago, website builders like Wix removed the technical barrier between design and code. You no longer needed to know how to program to create something professional.</p>
+
+      <p>It was a massive breakthrough that made building a website accessible to everyone. But even after the technical barrier was lowered, another barrier remained: the psychological one.</p>
+
+      <p>The fear of getting it wrong. The hesitation before clicking "publish." The quiet doubt that creeps in: "Who am I to design this?"</p>
+
+      <h2>What's different in web creation now</h2>
+
+      <p>Today, AI has completely transformed the way you build a site.</p>
+
+      <p>Take Aria, Wix Harmony's built-in AI agent, for example. With her, you don't have to arrive confident. You can show up unsure. You can say:</p>
+
+      <blockquote>
+        <p>"I don't know where to start."</p>
+        <p>"I'm afraid this will look unprofessional."</p>
+        <p>"I'm not good at design."</p>
+        <p>"Can you just fix this?"</p>
+      </blockquote>
+
+      <p>Aria doesn't judge. Instead, she translates. She can generate structure and suggest a layout. She can reorganize what feels messy and polish what feels off.</p>
+
+      <p>If something feels intimidating&mdash;she can take the first step for you. That's the real shift. AI gives you the courage to create.</p>
+
+      <p>So, if you've been stuck at that fear barrier and need a way to break through it, here are six ways to collaborate with AI and build your confidence along the way.</p>
+
+      <h3><span class="tip-number">01.</span> Share context and your intentions</h3>
+
+      <p>AI is incredibly capable, but it works best when it understands the "why" behind your site. Start by simply describing your business and your goals. This context helps your AI agent suggest the right tone and structure from the start.</p>
+
+      <p>When you're ready to add sections, try articulating your goals rather than giving strict commands. For example, instead of saying "Add a gallery," you might say: "I need a gallery midway down the homepage to showcase four of my main projects." Giving AI more context helps it generate solutions that actually fit your specific needs.</p>
+
+      <h3><span class="tip-number">02.</span> Treat AI like a consultant</h3>
+
+      <p>Most people jump straight into picking fonts and colors when they start building their site, which can quickly become overwhelming. Before you design anything, try having a conversation with AI. Let it do the initial research for you.</p>
+
+      <p>Instead of feeling pressured to know exactly what you need, ask for guidance:</p>
+
+      <blockquote>
+        <p>"What are the must-have sections for a photography portfolio?"</p>
+        <p>"What kind of color palette conveys 'trust' for a financial consultant?"</p>
+      </blockquote>
+
+      <p>This gives you a solid starting point so you aren't just guessing what looks professional.</p>
+
+      <h3><span class="tip-number">03.</span> Explore different options</h3>
+
+      <p>In the past, trying out three different layouts would take all afternoon. With AI, it takes seconds. So, don't settle for the first thing it generates.</p>
+
+      <p>For example, ask your agent to create three different versions of a section&mdash;maybe one minimalist, one bold and one image-heavy.</p>
+
+      <p>It's so much easier to look at three options and say, "I like the middle one," than it is to build that middle one from scratch. It lets you explore different vibes without wasting your time.</p>
+
+      <h3><span class="tip-number">04.</span> Set boundaries</h3>
+
+      <p>Sometimes, AI gets a little ahead of itself. It might throw in a weird gradient or an icon that just doesn't feel like you.</p>
+
+      <p>This is where it helps to set boundaries and tell AI what to do&mdash;and what not to do.</p>
+
+      <blockquote>
+        <p>"Redesign this header, but keep it simple&mdash;without any images."</p>
+        <p>"Create a services list, but use text only. No icons, please."</p>
+        <p>"Write my About section based on the info I provide, but do it without fluff."</p>
+      </blockquote>
+
+      <p>By narrowing down what you don't want, you help the AI understand your taste much faster.</p>
+
+      <h3><span class="tip-number">05.</span> Don't be afraid to mess things up</h3>
+
+      <p>There's freedom in knowing you have a safety net. If you want to add and customize a template or create a new section from scratch, my advice is to go for it. Even if you end up with misaligned text or a layout that looks chaotic, there's nothing lost.</p>
+
+      <p>Simply say to AI, "Fix the design" or "Align these elements." Think of it like having a pro step in to tidy up your rough draft, smoothing out the edges so everything looks intentional.</p>
+
+      <h3><span class="tip-number">06.</span> Add your own personal touch</h3>
+
+      <p>Here's the beautiful thing about a hybrid website editor like Wix Harmony: the manual, drag-and-drop controls are still there. You never lose control.</p>
+
+      <p>AI is fantastic for building the foundation, generating structure and making sure your site functions well on mobile. But the soul of the website comes from you.</p>
+
+      <p>Once AI helps you past the blank page, you might find you have the confidence to step in. Swap a suggested photo for something authentic and personal. Tweak the wording of a headline. Move a button until it feels just right.</p>
+
+      <h2>The bottom line: find your sweet spot</h2>
+
+      <p>Website building used to demand confidence upfront. Now, confidence can be built along the way.</p>
+
+      <p>What's important to remember is that there's no single "right" way to use AI in web creation. Some people will let Aria generate almost everything and then lightly tweak the design. Others will manually build most of the structure and ask AI to refine details.</p>
+
+      <p>The sweet spot is personal. It's the place where:</p>
+
+      <ul>
+        <li>You feel supported, not replaced.</li>
+        <li>You feel guided, not overwhelmed.</li>
+        <li>You feel in control, not intimidated.</li>
+      </ul>
+
+      <p>An incredible website is within your reach. You just have to begin.</p>
+    </div>
+
+    <div class="article-footer">
+      <a href="https://www.wix.com/blog/breaking-the-psychological-barrier-to-building-a-website" target="_blank">Read the original article on Wix Blog &rarr;</a>
+    </div>
+  </div>
+
+  <script>
+    var themes = {
+      midnight: {
+        name: 'Midnight',
+        headingFont: "Georgia, 'Times New Roman', serif",
+        bodyFont: "Georgia, 'Times New Roman', serif",
+        vars: {
+          '--bg': '#1a2332', '--text': '#e8e0d5', '--text-muted': '#aaa',
+          '--title': '#75a7d7', '--border': '#4a4a5a', '--border-light': '#555',
+          '--link': '#ccc', '--link-hover': '#fff', '--tag-border': '#555',
+          '--btn-border': '#ccc', '--btn-hover-bg': '#e8e0d5', '--btn-hover-text': '#1a2332',
+          '--footer-text': '#999'
+        },
+        swatches: ['#1a2332', '#75a7d7', '#6c6cd5']
+      },
+      daylight: {
+        name: 'Daylight',
+        headingFont: "Georgia, 'Times New Roman', serif",
+        bodyFont: "Georgia, 'Times New Roman', serif",
+        vars: {
+          '--bg': '#f5f3f0', '--text': '#2a2a2a', '--text-muted': '#666',
+          '--title': '#4a5a9e', '--border': '#ddd', '--border-light': '#ccc',
+          '--link': '#555', '--link-hover': '#1a1a1a', '--tag-border': '#bbb',
+          '--btn-border': '#555', '--btn-hover-bg': '#2a2a2a', '--btn-hover-text': '#f5f3f0',
+          '--footer-text': '#777'
+        },
+        swatches: ['#f5f3f0', '#4a5a9e', '#d5d1ca']
+      },
+      editorial: {
+        name: 'Editorial',
+        headingFont: "'Playfair Display', Georgia, serif",
+        bodyFont: "'Source Sans 3', 'Helvetica Neue', sans-serif",
+        vars: {
+          '--bg': '#faf8f5', '--text': '#2d2d2d', '--text-muted': '#7a7a7a',
+          '--title': '#8b4513', '--border': '#e0d8ce', '--border-light': '#d4ccc2',
+          '--link': '#6b5b4f', '--link-hover': '#2d2d2d', '--tag-border': '#c8bfb3',
+          '--btn-border': '#8b4513', '--btn-hover-bg': '#8b4513', '--btn-hover-text': '#faf8f5',
+          '--footer-text': '#999'
+        },
+        swatches: ['#faf8f5', '#8b4513', '#ded4c4']
+      },
+      modernist: {
+        name: 'Modernist',
+        headingFont: "'Space Grotesk', 'Arial', sans-serif",
+        bodyFont: "'Inter', 'Helvetica Neue', sans-serif",
+        vars: {
+          '--bg': '#111111', '--text': '#f0f0f0', '--text-muted': '#999',
+          '--title': '#00d4aa', '--border': '#333', '--border-light': '#444',
+          '--link': '#bbb', '--link-hover': '#fff', '--tag-border': '#444',
+          '--btn-border': '#00d4aa', '--btn-hover-bg': '#00d4aa', '--btn-hover-text': '#111111',
+          '--footer-text': '#888'
+        },
+        swatches: ['#111111', '#00d4aa', '#225555']
+      },
+      sunset: {
+        name: 'Sunset',
+        headingFont: "'DM Serif Display', Georgia, serif",
+        bodyFont: "'Nunito', 'Helvetica Neue', sans-serif",
+        vars: {
+          '--bg': '#2b1b35', '--text': '#f5e6d3', '--text-muted': '#c4a882',
+          '--title': '#e8956a', '--border': '#4a3555', '--border-light': '#5a4565',
+          '--link': '#d4b896', '--link-hover': '#f5e6d3', '--tag-border': '#5a4565',
+          '--btn-border': '#e8956a', '--btn-hover-bg': '#e8956a', '--btn-hover-text': '#2b1b35',
+          '--footer-text': '#a08870'
+        },
+        swatches: ['#2b1b35', '#e8956a', '#843855']
+      }
+    };
+
+    var currentThemeKey = localStorage.getItem('selectedTheme') || 'midnight';
+    var panelOpen = false;
+
+    function applyTheme(key) {
+      var theme = themes[key];
+      if (!theme) return;
+      currentThemeKey = key;
+      localStorage.setItem('selectedTheme', key);
+
+      var root = document.documentElement;
+      for (var prop in theme.vars) {
+        root.style.setProperty(prop, theme.vars[prop]);
+      }
+
+      document.body.style.fontFamily = theme.bodyFont;
+      document.body.style.backgroundColor = theme.vars['--bg'];
+      document.body.style.color = theme.vars['--text'];
+      var nav = document.querySelector('.nav-bar');
+      if (nav) nav.style.backgroundColor = theme.vars['--bg'];
+
+      var headings = document.querySelectorAll('h1, h2, h3, h4');
+      for (var i = 0; i < headings.length; i++) {
+        headings[i].style.fontFamily = theme.headingFont;
+      }
+
+      updateActiveCard();
+    }
+
+    function buildPanel() {
+      var panel = document.getElementById('theme-panel');
+      panel.innerHTML = '';
+      for (var key in themes) {
+        var t = themes[key];
+        var card = document.createElement('div');
+        card.className = 'theme-card' + (key === currentThemeKey ? ' active' : '');
+        card.dataset.theme = key;
+
+        var swatches = document.createElement('div');
+        swatches.className = 'theme-card-swatches';
+        for (var s = 0; s < t.swatches.length; s++) {
+          var dot = document.createElement('div');
+          dot.className = 'theme-swatch';
+          dot.style.backgroundColor = t.swatches[s];
+          swatches.appendChild(dot);
+        }
+
+        var name = document.createElement('span');
+        name.className = 'theme-card-name';
+        name.textContent = t.name;
+        name.style.fontFamily = t.headingFont;
+
+        card.appendChild(swatches);
+        card.appendChild(name);
+        card.addEventListener('click', (function(k) {
+          return function() { applyTheme(k); };
+        })(key));
+
+        panel.appendChild(card);
+      }
+    }
+
+    function updateActiveCard() {
+      var cards = document.querySelectorAll('.theme-card');
+      for (var i = 0; i < cards.length; i++) {
+        cards[i].classList.toggle('active', cards[i].dataset.theme === currentThemeKey);
+      }
+    }
+
+    function togglePanel() {
+      panelOpen = !panelOpen;
+      document.getElementById('theme-panel').classList.toggle('open', panelOpen);
+    }
+
+    document.getElementById('theme-toggle').addEventListener('click', function(e) {
+      e.stopPropagation();
+      togglePanel();
+    });
+
+    document.addEventListener('click', function(e) {
+      if (panelOpen && !document.getElementById('theme-panel').contains(e.target)) {
+        panelOpen = false;
+        document.getElementById('theme-panel').classList.remove('open');
+      }
+    });
+
+    buildPanel();
+    applyTheme(currentThemeKey);
+  </script>
+</body>
+</html>
