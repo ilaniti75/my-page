@@ -6,7 +6,7 @@
   <title>The psychological barrier to building a website | Ilanit Izhar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600&family=Nunito:wght@400;600&family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@400;600&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600&family=Nunito:wght@400;600&family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@400;600&family=Space+Grotesk:wght@400;600&family=Space+Mono:wght@400;700&family=Bricolage+Grotesque:wght@400;700;800&family=Outfit:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
     .article-page {
@@ -289,6 +289,7 @@
         name: 'Daylight',
         headingFont: "Georgia, 'Times New Roman', serif",
         bodyFont: "Georgia, 'Times New Roman', serif",
+        fontSizes: { h1: '3.5rem', h2: '2rem' },
         vars: {
           '--bg': '#f5f3f0', '--text': '#2a2a2a', '--text-muted': '#666',
           '--title': '#4a5a9e', '--border': '#ddd', '--border-light': '#ccc',
@@ -302,6 +303,7 @@
         name: 'Editorial',
         headingFont: "'Playfair Display', Georgia, serif",
         bodyFont: "'Source Sans 3', 'Helvetica Neue', sans-serif",
+        fontSizes: { h1: '3.5rem', h2: '3.5rem' },
         vars: {
           '--bg': '#faf8f5', '--text': '#2d2d2d', '--text-muted': '#7a7a7a',
           '--title': '#8b4513', '--border': '#e0d8ce', '--border-light': '#d4ccc2',
@@ -314,7 +316,8 @@
       modernist: {
         name: 'Modernist',
         headingFont: "'Space Grotesk', 'Arial', sans-serif",
-        bodyFont: "'Inter', 'Helvetica Neue', sans-serif",
+        bodyFont: "'Space Mono', monospace",
+        fontSizes: { h1: '3rem', h2: '2rem' },
         vars: {
           '--bg': '#111111', '--text': '#f0f0f0', '--text-muted': '#999',
           '--title': '#00d4aa', '--border': '#333', '--border-light': '#444',
@@ -324,18 +327,19 @@
         },
         swatches: ['#111111', '#00d4aa', '#225555']
       },
-      sunset: {
-        name: 'Sunset',
-        headingFont: "'DM Serif Display', Georgia, serif",
-        bodyFont: "'Nunito', 'Helvetica Neue', sans-serif",
+      playful: {
+        name: 'Playful',
+        headingFont: "'Syne', 'Arial', sans-serif",
+        bodyFont: "'Outfit', 'Helvetica Neue', sans-serif",
+        fontSizes: { h1: '3.5rem', h2: '2.2rem' },
         vars: {
-          '--bg': '#2b1b35', '--text': '#f5e6d3', '--text-muted': '#c4a882',
-          '--title': '#e8956a', '--border': '#4a3555', '--border-light': '#5a4565',
-          '--link': '#d4b896', '--link-hover': '#f5e6d3', '--tag-border': '#5a4565',
-          '--btn-border': '#e8956a', '--btn-hover-bg': '#e8956a', '--btn-hover-text': '#2b1b35',
-          '--footer-text': '#a08870'
+          '--bg': '#1a1130', '--text': '#f5f0ff', '--text-muted': '#c4b0e0',
+          '--title': '#ff6bb5', '--border': '#3d2a5c', '--border-light': '#4d3a6c',
+          '--link': '#d9a0ff', '--link-hover': '#fff', '--tag-border': '#5a3d8a',
+          '--btn-border': '#ff6bb5', '--btn-hover-bg': '#ff6bb5', '--btn-hover-text': '#1a1130',
+          '--footer-text': '#9980bb'
         },
-        swatches: ['#2b1b35', '#e8956a', '#843855']
+        swatches: ['#1a1130', '#ff6bb5', '#f7a832']
       }
     };
 
@@ -359,6 +363,14 @@
       var nav = document.querySelector('.nav-bar');
       if (nav) nav.style.backgroundColor = theme.vars['--bg'];
 
+      var sizes = theme.fontSizes || {};
+      var defaultSizes = { h1: '2.2rem', h2: '1.6rem' };
+      document.querySelectorAll('h1').forEach(function(el) {
+        el.style.fontSize = sizes.h1 || defaultSizes.h1;
+      });
+      document.querySelectorAll('h2').forEach(function(el) {
+        el.style.fontSize = sizes.h2 || defaultSizes.h2;
+      });
       var headings = document.querySelectorAll('h1, h2, h3, h4');
       for (var i = 0; i < headings.length; i++) {
         headings[i].style.fontFamily = theme.headingFont;
