@@ -272,6 +272,20 @@
 
   <script>
     var themes = {
+      editorial: {
+        name: 'Editorial',
+        headingFont: "'Playfair Display', Georgia, serif",
+        bodyFont: "'Source Sans 3', 'Helvetica Neue', sans-serif",
+        fontSizes: { h1: '3.5rem', h2: '3.5rem' },
+        vars: {
+          '--bg': '#faf8f5', '--text': '#2d2d2d', '--text-muted': '#7a7a7a',
+          '--title': '#8b4513', '--border': '#e0d8ce', '--border-light': '#d4ccc2',
+          '--link': '#6b5b4f', '--link-hover': '#2d2d2d', '--tag-border': '#c8bfb3',
+          '--btn-border': '#8b4513', '--btn-hover-bg': '#8b4513', '--btn-hover-text': '#faf8f5',
+          '--footer-text': '#999'
+        },
+        swatches: ['#faf8f5', '#8b4513', '#ded4c4']
+      },
       midnight: {
         name: 'Midnight',
         headingFont: "Georgia, 'Times New Roman', serif",
@@ -291,27 +305,13 @@
         bodyFont: "Georgia, 'Times New Roman', serif",
         fontSizes: { h1: '3.5rem', h2: '2rem' },
         vars: {
-          '--bg': '#f5f3f0', '--text': '#2a2a2a', '--text-muted': '#666',
-          '--title': '#4a5a9e', '--border': '#ddd', '--border-light': '#ccc',
-          '--link': '#555', '--link-hover': '#1a1a1a', '--tag-border': '#bbb',
-          '--btn-border': '#555', '--btn-hover-bg': '#2a2a2a', '--btn-hover-text': '#f5f3f0',
+          '--bg': '#ffffff', '--text': '#111111', '--text-muted': '#555',
+          '--title': '#111111', '--border': '#ddd', '--border-light': '#ccc',
+          '--link': '#333', '--link-hover': '#000', '--tag-border': '#999',
+          '--btn-border': '#111111', '--btn-hover-bg': '#111111', '--btn-hover-text': '#ffffff',
           '--footer-text': '#777'
         },
-        swatches: ['#f5f3f0', '#4a5a9e', '#d5d1ca']
-      },
-      editorial: {
-        name: 'Editorial',
-        headingFont: "'Playfair Display', Georgia, serif",
-        bodyFont: "'Source Sans 3', 'Helvetica Neue', sans-serif",
-        fontSizes: { h1: '3.5rem', h2: '3.5rem' },
-        vars: {
-          '--bg': '#faf8f5', '--text': '#2d2d2d', '--text-muted': '#7a7a7a',
-          '--title': '#8b4513', '--border': '#e0d8ce', '--border-light': '#d4ccc2',
-          '--link': '#6b5b4f', '--link-hover': '#2d2d2d', '--tag-border': '#c8bfb3',
-          '--btn-border': '#8b4513', '--btn-hover-bg': '#8b4513', '--btn-hover-text': '#faf8f5',
-          '--footer-text': '#999'
-        },
-        swatches: ['#faf8f5', '#8b4513', '#ded4c4']
+        swatches: ['#ffffff', '#111111', '#eaeaea']
       },
       modernist: {
         name: 'Modernist',
@@ -343,7 +343,7 @@
       }
     };
 
-    var currentThemeKey = localStorage.getItem('selectedTheme') || 'midnight';
+    var currentThemeKey = localStorage.getItem('selectedTheme') || 'editorial';
     var panelOpen = false;
 
     function applyTheme(key) {

@@ -13,7 +13,7 @@
   <nav class="nav-bar">
     <a href="#">About</a>
     <a href="#experience">Experience</a>
-    <a href="#focus">Key Focus Areas</a>
+    <a href="#focus">Focus Areas</a>
     <a href="#articles">Articles</a>
     <a href="#contact">Contact</a>
     <div class="theme-panel-wrapper">
@@ -128,7 +128,7 @@
   <hr class="section-divider">
 
   <section id="focus">
-    <h2>Key Focus Areas</h2>
+    <h2>Focus Areas</h2>
     <ul class="focus-list">
       <li>Complex systems &amp; product thinking</li>
       <li>AI-assisted creation tools</li>
@@ -166,6 +166,27 @@
 
   <script>
     var themes = {
+      editorial: {
+        name: 'Editorial',
+        headingFont: "'Playfair Display', Georgia, serif",
+        bodyFont: "'Source Sans 3', 'Helvetica Neue', sans-serif",
+        fontSizes: { h1: '3.5rem', h2: '3.5rem' },
+        vars: {
+          '--bg': '#faf8f5', '--text': '#2d2d2d', '--text-muted': '#7a7a7a',
+          '--title': '#8b4513', '--border': '#e0d8ce', '--border-light': '#d4ccc2',
+          '--link': '#6b5b4f', '--link-hover': '#2d2d2d', '--tag-border': '#c8bfb3',
+          '--btn-border': '#8b4513', '--btn-hover-bg': '#8b4513', '--btn-hover-text': '#faf8f5',
+          '--footer-text': '#999'
+        },
+        scroll: [
+          { id: 'about',      bg: '#faf8f5', text: '#2d2d2d' },
+          { id: 'experience', bg: '#f3efe8', text: '#2d2d2d' },
+          { id: 'focus',      bg: '#ece6dc', text: '#2d2d2d' },
+          { id: 'articles',   bg: '#e5ddd0', text: '#2d2d2d' },
+          { id: 'contact',    bg: '#ded4c4', text: '#2d2d2d' }
+        ],
+        swatches: ['#faf8f5', '#8b4513', '#ded4c4']
+      },
       midnight: {
         name: 'Midnight',
         headingFont: "Georgia, 'Times New Roman', serif",
@@ -192,41 +213,20 @@
         bodyFont: "Georgia, 'Times New Roman', serif",
         fontSizes: { h1: '3.5rem', h2: '2rem' },
         vars: {
-          '--bg': '#f5f3f0', '--text': '#2a2a2a', '--text-muted': '#666',
-          '--title': '#4a5a9e', '--border': '#ddd', '--border-light': '#ccc',
-          '--link': '#555', '--link-hover': '#1a1a1a', '--tag-border': '#bbb',
-          '--btn-border': '#555', '--btn-hover-bg': '#2a2a2a', '--btn-hover-text': '#f5f3f0',
+          '--bg': '#ffffff', '--text': '#111111', '--text-muted': '#555',
+          '--title': '#111111', '--border': '#ddd', '--border-light': '#ccc',
+          '--link': '#333', '--link-hover': '#000', '--tag-border': '#999',
+          '--btn-border': '#111111', '--btn-hover-bg': '#111111', '--btn-hover-text': '#ffffff',
           '--footer-text': '#777'
         },
         scroll: [
-          { id: 'about',      bg: '#f5f3f0', text: '#2a2a2a' },
-          { id: 'experience', bg: '#edeae5', text: '#2a2a2a' },
-          { id: 'focus',      bg: '#e5e2dc', text: '#2a2a2a' },
-          { id: 'articles',   bg: '#ddd9d3', text: '#2a2a2a' },
-          { id: 'contact',    bg: '#d5d1ca', text: '#2a2a2a' }
+          { id: 'about',      bg: '#ffffff', text: '#111111' },
+          { id: 'experience', bg: '#fafafa', text: '#111111' },
+          { id: 'focus',      bg: '#f5f5f5', text: '#111111' },
+          { id: 'articles',   bg: '#f0f0f0', text: '#111111' },
+          { id: 'contact',    bg: '#eaeaea', text: '#111111' }
         ],
-        swatches: ['#f5f3f0', '#4a5a9e', '#d5d1ca']
-      },
-      editorial: {
-        name: 'Editorial',
-        headingFont: "'Playfair Display', Georgia, serif",
-        bodyFont: "'Source Sans 3', 'Helvetica Neue', sans-serif",
-        fontSizes: { h1: '3.5rem', h2: '3.5rem' },
-        vars: {
-          '--bg': '#faf8f5', '--text': '#2d2d2d', '--text-muted': '#7a7a7a',
-          '--title': '#8b4513', '--border': '#e0d8ce', '--border-light': '#d4ccc2',
-          '--link': '#6b5b4f', '--link-hover': '#2d2d2d', '--tag-border': '#c8bfb3',
-          '--btn-border': '#8b4513', '--btn-hover-bg': '#8b4513', '--btn-hover-text': '#faf8f5',
-          '--footer-text': '#999'
-        },
-        scroll: [
-          { id: 'about',      bg: '#faf8f5', text: '#2d2d2d' },
-          { id: 'experience', bg: '#f3efe8', text: '#2d2d2d' },
-          { id: 'focus',      bg: '#ece6dc', text: '#2d2d2d' },
-          { id: 'articles',   bg: '#e5ddd0', text: '#2d2d2d' },
-          { id: 'contact',    bg: '#ded4c4', text: '#2d2d2d' }
-        ],
-        swatches: ['#faf8f5', '#8b4513', '#ded4c4']
+        swatches: ['#ffffff', '#111111', '#eaeaea']
       },
       modernist: {
         name: 'Modernist',
@@ -272,7 +272,7 @@
       }
     };
 
-    var currentThemeKey = localStorage.getItem('selectedTheme') || 'midnight';
+    var currentThemeKey = localStorage.getItem('selectedTheme') || 'editorial';
     var panelOpen = false;
 
     function applyTheme(key) {
