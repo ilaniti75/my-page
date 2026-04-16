@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery Loading — Mode Comparison</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    h1 { font-size: 20px; font-weight: 600; color: #1e1e1e; margin-bottom: 4px; }
+    .subtitle { font-size: 14px; color: #888; margin-bottom: 20px; }
+
+    /* ============ MODE TOGGLE ============ */
+    .mode-toggle {
+      display: flex;
+      background: #e5e5e5;
+      border-radius: 10px;
+      padding: 3px;
+      margin-bottom: 20px;
+    }
+    .mode-btn {
+      padding: 8px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      background: transparent;
+      color: #666;
+      transition: all 0.25s;
+    }
+    .mode-btn.active {
+      background: white;
+      color: #1e1e1e;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .settings {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: #666;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .settings label { display: flex; align-items: center; gap: 6px; }
+    .settings input[type="range"] { width: 80px; }
+    .settings .blur-only { display: none; }
+    body.mode-blur .settings .blur-only { display: flex; }
+
+    .controls { display: flex; gap: 12px; margin-bottom: 24px; }
+
+    button {
+      padding: 8px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: #3b82f6; color: white; }
+    .btn-primary:hover { background: #2563eb; }
+    .btn-secondary { background: #e5e5e5; color: #333; }
+    .btn-secondary:hover { background: #d4d4d4; }
+
+    .panel {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      width: 100%;
+      max-width: 1100px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #eee;
+    }
+    .panel-title { font-size: 16px; font-weight: 600; }
+    .tabs { display: flex; gap: 4px; }
+    .tab {
+      padding: 6px 14px; border-radius: 6px; font-size: 13px;
+      color: #666; cursor: pointer; transition: all 0.15s;
+    }
+    .tab:hover { background: #f5f5f5; }
+    .tab.active { background: #1e1e1e; color: white; }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    /* ============ CARD ============ */
+    .card {
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid #eee;
+    }
+
+    .card .image-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #f0f0f0;
+    }
+
+    /* --- Gray skeleton overlay (for skeleton mode) --- */
+    .card .skeleton-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      padding: 12px;
+      transition: opacity 0.35s ease;
+    }
+
+    .card .skeleton-overlay .skel-img {
+      flex: 1;
+      background: #e0e0e0;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card .skeleton-overlay .skel-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%);
+      animation: shimmer 1.5s infinite;
+      transform: translateX(-100%);
+    }
+
+    @keyframes shimmer {
+      100% { transform: translateX(100%); }
+    }
+
+    /* Hide skeleton overlay in blur mode */
+    body.mode-blur .card .skeleton-overlay { display: none; }
+
+    /* --- Blur placeholder (for blur mode) --- */
+    .card .blur-placeholder {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background-size: cover;
+      background-position: center;
+      filter: blur(20px) saturate(1.2);
+      transform: scale(1.1);
+      transition: opacity 0.6s ease;
+    }
+
+    .card .blur-placeholder::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.25) 0%, transparent 70%);
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+
+    /* Hide blur placeholder in skeleton mode */
+    body.mode-skeleton .card .blur-placeholder { display: none; }
+
+    /* --- Full resolution image --- */
+    .card .thumb {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    /* --- Revealed state --- */
+    .card.revealed .skeleton-overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .card.revealed .blur-placeholder {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .card.revealed .thumb {
+      opacity: 1;
+    }
+
+    /* --- Info area --- */
+    .card .info {
+      padding: 12px 14px;
+      background: white;
+    }
+
+    .card .info-skeleton { display: block; transition: opacity 0.4s ease 0.1s; }
+    .card .info-real { display: none; }
+    .card.revealed .info-skeleton { display: none; }
+    .card.revealed .info-real { display: block; }
+
+    .card .skel-line {
+      background: #e8e8e8;
+      border-radius: 4px;
+      height: 12px;
+      margin-bottom: 6px;
+    }
+    .card .skel-line.w80 { width: 80%; }
+    .card .skel-line.w50 { width: 50%; }
+    .card .skel-btn {
+      background: #e8e8e8;
+      border-radius: 4px;
+      height: 22px;
+      width: 72px;
+      margin-top: 4px;
+    }
+
+    .card .info h3 {
+      font-size: 14px; font-weight: 600; color: #1e1e1e;
+      margin-bottom: 4px; line-height: 1.3;
+    }
+    .card .info p {
+      font-size: 12px; color: #888;
+      margin-bottom: 8px; line-height: 1.4;
+    }
+    .card .info .cta {
+      display: inline-block; padding: 5px 14px;
+      background: #3b82f6; color: white; border-radius: 5px;
+      font-size: 12px; font-weight: 500; text-decoration: none;
+    }
+
+    /* ============ PHASE INDICATOR ============ */
+    .phase-bar {
+      margin-top: 20px;
+      padding: 14px 16px;
+      background: #fafafa;
+      border-radius: 8px;
+      border: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .phase-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: #e0e0e0;
+      transition: background 0.3s, box-shadow 0.3s;
+      flex-shrink: 0;
+    }
+    .phase-dot.active { background: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.2); }
+    .phase-dot.done { background: #22c55e; }
+
+    .phase-label {
+      font-size: 13px; color: #888;
+      transition: color 0.3s;
+    }
+    .phase-label.active { color: #1e1e1e; font-weight: 500; }
+
+    .phase-connector {
+      width: 30px; height: 2px; background: #e0e0e0;
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+    .phase-connector.done { background: #22c55e; }
+
+    /* In skeleton mode, hide the middle phase */
+    body.mode-skeleton .blur-phase { display: none; }
+  </style>
+</head>
+<body class="mode-blur">
+
+  <h1>Gallery Preloading</h1>
+  <p class="subtitle">Compare loading experiences side by side</p>
+
+  <div class="mode-toggle">
+    <button class="mode-btn active" data-mode="blur" onclick="switchMode('blur')">Blur Image</button>
+    <button class="mode-btn" data-mode="skeleton" onclick="switchMode('skeleton')">Gray Skeleton</button>
+  </div>
+
+  <div class="settings">
+    <label>
+      Stagger:
+      <input type="range" id="staggerSlider" min="50" max="400" value="150" step="10">
+      <span id="staggerVal">150ms</span>
+    </label>
+    <label class="blur-only">
+      Blur phase:
+      <input type="range" id="blurPhaseSlider" min="300" max="3000" value="800" step="100">
+      <span id="blurPhaseVal">800ms</span>
+    </label>
+    <label>
+      Load delay:
+      <input type="range" id="loadSlider" min="500" max="4000" value="2000" step="100">
+      <span id="loadVal">2000ms</span>
+    </label>
+  </div>
+
+  <div class="controls">
+    <button class="btn-primary" onclick="replay()">Replay</button>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <span class="panel-title">Add Section</span>
+      <div class="tabs">
+        <div class="tab active">Welcome</div>
+        <div class="tab">About</div>
+        <div class="tab">Portfolio</div>
+        <div class="tab">Services</div>
+      </div>
+    </div>
+
+    <div class="gallery" id="gallery"></div>
+
+    <div class="phase-bar" id="phaseBar">
+      <div class="phase-dot" id="dot0"></div>
+      <span class="phase-label" id="lbl0">Skeleton</span>
+      <div class="phase-connector blur-phase" id="con0"></div>
+      <div class="phase-dot blur-phase" id="dot1"></div>
+      <span class="phase-label blur-phase" id="lbl1">Blur placeholders</span>
+      <div class="phase-connector" id="con1"></div>
+      <div class="phase-dot" id="dot2"></div>
+      <span class="phase-label" id="lbl2">Sequential reveal</span>
+    </div>
+  </div>
+
+<script>
+const templates = [
+  { title: "Shop Our Latest Collections", desc: "Grab their attention with copy that clearly states what the site is about.", cta: "Shop Now",    img: "https://picsum.photos/seed/tpl1/400/250", tinyImg: "https://picsum.photos/seed/tpl1/20/12",  dominantColor: "#6b8cae" },
+  { title: "Explore My Latest Work",      desc: "A space to welcome visitors with engaging visuals and clear messaging.",  cta: "Explore",     img: "https://picsum.photos/seed/tpl2/400/250", tinyImg: "https://picsum.photos/seed/tpl2/20/12",  dominantColor: "#9b8fc4" },
+  { title: "Efficient Services & Solutions", desc: "Welcome visitors with copy that clearly states what your site is about.", cta: "Get Started", img: "https://picsum.photos/seed/tpl3/400/250", tinyImg: "https://picsum.photos/seed/tpl3/20/12", dominantColor: "#c4a86b" },
+  { title: "Reach Your Business Potential", desc: "Grab attention with an engaging image or video.",                         cta: "Learn More",  img: "https://picsum.photos/seed/tpl4/400/250", tinyImg: "https://picsum.photos/seed/tpl4/20/12", dominantColor: "#6bc4a8" },
+  { title: "Shop Our Unique Products",     desc: "Welcome visitors to your site with clear copy about what you offer.",     cta: "Shop Now",    img: "https://picsum.photos/seed/tpl5/400/250", tinyImg: "https://picsum.photos/seed/tpl5/20/12", dominantColor: "#c49b6b" },
+  { title: "Discover Modern Technology",   desc: "Products for smarter living. Welcome visitors with engaging content.",    cta: "Shop Now",    img: "https://picsum.photos/seed/tpl6/400/250", tinyImg: "https://picsum.photos/seed/tpl6/20/12", dominantColor: "#ae6bc4" },
+  { title: "Elevate Your Digital Presence", desc: "A space to welcome visitors and grab their attention.",                  cta: "Start Now",   img: "https://picsum.photos/seed/tpl7/400/250", tinyImg: "https://picsum.photos/seed/tpl7/20/12", dominantColor: "#6bc48c" },
+  { title: "Your Health is Our Priority",  desc: "Welcome visitors with clear, engaging copy and imagery.",                 cta: "Explore",     img: "https://picsum.photos/seed/tpl8/400/250", tinyImg: "https://picsum.photos/seed/tpl8/20/12", dominantColor: "#c46b6b" },
+  { title: "Empowering Communities",       desc: "A space to welcome visitors to your site with engaging content.",         cta: "Join Us",     img: "https://picsum.photos/seed/tpl9/400/250", tinyImg: "https://picsum.photos/seed/tpl9/20/12", dominantColor: "#8cc46b" },
+];
+
+let currentMode = 'blur'; // 'blur' | 'skeleton'
+
+const gallery = document.getElementById('gallery');
+const staggerSlider = document.getElementById('staggerSlider');
+const staggerVal = document.getElementById('staggerVal');
+const blurPhaseSlider = document.getElementById('blurPhaseSlider');
+const blurPhaseVal = document.getElementById('blurPhaseVal');
+const loadSlider = document.getElementById('loadSlider');
+const loadVal = document.getElementById('loadVal');
+
+staggerSlider.addEventListener('input', () => staggerVal.textContent = staggerSlider.value + 'ms');
+blurPhaseSlider.addEventListener('input', () => blurPhaseVal.textContent = blurPhaseSlider.value + 'ms');
+loadSlider.addEventListener('input', () => loadVal.textContent = loadSlider.value + 'ms');
+
+let timeouts = [];
+function clearAll() {
+  timeouts.forEach(t => clearTimeout(t));
+  timeouts = [];
+}
+
+function setPhase(phase) {
+  // blur mode: 0=skeleton, 1=blur, 2=sharpen
+  // skeleton mode: 0=skeleton, 2=reveal (skip 1)
+  for (let i = 0; i < 3; i++) {
+    const dot = document.getElementById(`dot${i}`);
+    const lbl = document.getElementById(`lbl${i}`);
+    if (!dot || !lbl) continue;
+    dot.className = 'phase-dot' + (i === 1 ? ' blur-phase' : '');
+    lbl.className = 'phase-label' + (i === 1 ? ' blur-phase' : '');
+    if (i < phase) dot.classList.add('done');
+    if (i === phase) { dot.classList.add('active'); lbl.classList.add('active'); }
+  }
+  for (let i = 0; i < 2; i++) {
+    const con = document.getElementById(`con${i}`);
+    if (!con) continue;
+    con.className = 'phase-connector' + (i === 0 ? ' blur-phase' : '');
+    if (i < phase) con.classList.add('done');
+  }
+}
+
+function buildGallery() {
+  gallery.innerHTML = '';
+  templates.forEach((tpl, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.index = i;
+    card.innerHTML = `
+      <div class="image-wrap">
+        <div class="skeleton-overlay">
+          <div class="skel-img"></div>
+        </div>
+        <div class="blur-placeholder" style="background-color:${tpl.dominantColor}; background-image:url(${tpl.tinyImg}); opacity:0;" data-tiny="${tpl.tinyImg}"></div>
+        <img class="thumb" data-src="${tpl.img}" alt="${tpl.title}">
+      </div>
+      <div class="info">
+        <div class="info-skeleton">
+          <div class="skel-line w80"></div>
+          <div class="skel-line w50"></div>
+          <div class="skel-btn"></div>
+        </div>
+        <div class="info-real">
+          <h3>${tpl.title}</h3>
+          <p>${tpl.desc}</p>
+          <a class="cta" href="#">${tpl.cta}</a>
+        </div>
+      </div>
+    `;
+    gallery.appendChild(card);
+  });
+}
+
+function runBlurSequence() {
+  clearAll();
+  const stagger = parseInt(staggerSlider.value);
+  const blurDelay = parseInt(blurPhaseSlider.value);
+  const loadDelay = parseInt(loadSlider.value);
+  const cards = [...gallery.querySelectorAll('.card')];
+
+  setPhase(0);
+
+  // Phase 1: show blur placeholders
+  cards.forEach((card, i) => {
+    const blur = card.querySelector('.blur-placeholder');
+    const t = setTimeout(() => {
+      if (i === 0) setPhase(1);
+      blur.style.opacity = '1';
+    }, blurDelay + i * (stagger / 2));
+    timeouts.push(t);
+  });
+
+  // Phase 2: sharpen
+  const sharpenStart = blurDelay + cards.length * (stagger / 2) + loadDelay;
+
+  cards.forEach((card, i) => {
+    const t = setTimeout(() => {
+      if (i === 0) setPhase(2);
+      const img = card.querySelector('.thumb');
+      img.src = img.dataset.src;
+      const reveal = () => {
+        card.querySelector('.blur-placeholder').style.removeProperty('opacity');
+        card.classList.add('revealed');
+      };
+      img.onload = reveal;
+      if (img.complete && img.naturalWidth > 0) reveal();
+    }, sharpenStart + i * stagger);
+    timeouts.push(t);
+  });
+}
+
+function runSkeletonSequence() {
+  clearAll();
+  const stagger = parseInt(staggerSlider.value);
+  const loadDelay = parseInt(loadSlider.value);
+  const cards = [...gallery.querySelectorAll('.card')];
+
+  setPhase(0);
+
+  // Directly go to reveal after load delay
+  cards.forEach((card, i) => {
+    const t = setTimeout(() => {
+      if (i === 0) setPhase(2);
+      const img = card.querySelector('.thumb');
+      img.src = img.dataset.src;
+      const reveal = () => {
+        card.classList.add('revealed');
+      };
+      img.onload = reveal;
+      if (img.complete && img.naturalWidth > 0) reveal();
+    }, loadDelay + i * stagger);
+    timeouts.push(t);
+  });
+}
+
+function resetCards() {
+  clearAll();
+  gallery.querySelectorAll('.card').forEach(card => {
+    card.classList.remove('revealed');
+    const blur = card.querySelector('.blur-placeholder');
+    blur.style.opacity = '0';
+    const img = card.querySelector('.thumb');
+    img.onload = null;
+    img.removeAttribute('src');
+    img.removeAttribute('style');
+  });
+  setPhase(0);
+}
+
+function replay() {
+  resetCards();
+  setTimeout(() => {
+    if (currentMode === 'blur') runBlurSequence();
+    else runSkeletonSequence();
+  }, 200);
+}
+
+function switchMode(mode) {
+  currentMode = mode;
+  document.body.className = `mode-${mode}`;
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.mode === mode);
+  });
+  // Update phase labels
+  document.getElementById('lbl2').textContent = mode === 'blur' ? 'Sequential sharpen' : 'Sequential reveal';
+  replay();
+}
+
+// Init
+buildGallery();
+setTimeout(() => runBlurSequence(), 400);
+</script>
+
+</body>
+</html>
