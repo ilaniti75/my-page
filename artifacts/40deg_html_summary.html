@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, serif; color: #1a1a1a; background: #fff; max-width: 780px; margin: 0 auto; padding: 48px 32px 80px; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+  h2 { font-size: 17px; font-weight: 700; margin: 36px 0 10px; border-bottom: 1px solid #e0e0e0; padding-bottom: 6px; }
+  p { font-size: 15px; line-height: 1.75; margin-bottom: 12px; color: #222; }
+  .meta { font-size: 13px; color: #888; margin-bottom: 40px; font-family: sans-serif; }
+  .feedback-box { background: #f5f5f5; border-left: 3px solid #333; padding: 16px 20px; border-radius: 0 6px 6px 0; margin-bottom: 24px; font-size: 14px; line-height: 1.7; color: #333; font-family: sans-serif; font-style: italic; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 14px; font-family: sans-serif; }
+  th { background: #1a1a1a; color: #fff; padding: 9px 14px; text-align: left; font-weight: 600; }
+  td { padding: 9px 14px; border-bottom: 1px solid #eee; }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { font-weight: 600; }
+  .diagram-wrap { margin: 24px 0 32px; background: #fafafa; border: 1px solid #e8e8e8; border-radius: 8px; padding: 24px 16px 16px; }
+  .diagram-label { font-family: sans-serif; font-size: 12px; color: #888; text-align: center; margin-top: 10px; }
+  ul { font-size: 15px; line-height: 1.8; padding-left: 20px; margin-bottom: 16px; color: #222; }
+  li { margin-bottom: 4px; }
+  .tag { display: inline-block; font-family: sans-serif; font-size: 11px; background: #1a1a1a; color: #fff; padding: 2px 8px; border-radius: 20px; margin-bottom: 20px; }
+  .sources { margin-top: 48px; padding-top: 20px; border-top: 1px solid #e0e0e0; }
+  .sources h2 { font-size: 14px; color: #888; border: none; margin-bottom: 12px; }
+  .sources ul { font-size: 13px; line-height: 1.9; padding-left: 18px; color: #444; }
+  .sources a { color: #1a1a1a; text-decoration: underline; text-underline-offset: 3px; }
+  .sources a:hover { color: #555; }
+</style>
+</head>
+<body>
+
+<div class="tag">Design Review · April 2026</div>
+<h1>The 40° Rule</h1>
+<p class="meta">Summary of feedback received and research on visual ergonomics for desktop web design</p>
+
+<h2>The feedback we received</h2>
+<div class="feedback-box">
+"I always teach about the 40° horizontal scope that the eye sees comfortably. Somewhere between a 13" and 17" screen — depending on how close or far we are from the screen — we exceed that scope. When that happens, I expect the site to have empty margins to focus reading, especially when high user concentration is needed: shop, about, team, services."
+</div>
+
+<h2>The principle</h2>
+<p>The human eye has a natural <strong>cone of comfortable focus</strong> spanning roughly <strong>40° horizontally</strong>. Within this cone, the eye reads without strain. Beyond it, the user must physically move their eyes or head — which adds cognitive load, especially during focused tasks like reading, browsing services, or making booking decisions.</p>
+
+<h2>Why screen size matters</h2>
+<p>The 40° threshold is about the relationship between <strong>screen size and viewing distance</strong>, not screen size alone. At a typical laptop distance of 50–70cm:</p>
+<ul>
+  <li>A <strong>13" screen</strong> generally fits within the comfortable cone</li>
+  <li>A <strong>17" screen</strong> (or any large monitor at close range) starts to exceed it — particularly at the corners</li>
+</ul>
+<p>Full-width layouts on larger screens force unnecessary eye travel across the full canvas.</p>
+
+<h2>Visual: the cone of vision</h2>
+<div class="diagram-wrap">
+<svg width="100%" viewBox="0 0 680 380">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Cone fill -->
+  <polygon points="340,365 224,55 456,55" fill="#eef7f3"/>
+  <!-- Cone edges -->
+  <line x1="340" y1="365" x2="224" y2="55" stroke="#1D9E75" stroke-width="1" stroke-dasharray="4 3" opacity="0.7"/>
+  <line x1="340" y1="365" x2="456" y2="55" stroke="#1D9E75" stroke-width="1" stroke-dasharray="4 3" opacity="0.7"/>
+
+  <!-- Angle arcs -->
+  <path d="M340,352 A22,22 0 0,1 324,340" fill="none" stroke="#1D9E75" stroke-width="1.2"/>
+  <path d="M340,352 A22,22 0 0,0 356,340" fill="none" stroke="#1D9E75" stroke-width="1.2"/>
+  <text font-family="sans-serif" font-size="12" x="340" y="334" text-anchor="middle" fill="#1D9E75">40°</text>
+
+  <!-- Far screen: 13" - fits -->
+  <rect x="276" y="178" width="128" height="9" rx="3" fill="#085041" opacity="0.9"/>
+  <text font-family="sans-serif" font-size="12" x="340" y="172" text-anchor="middle" fill="#085041">13" screen · fits comfortably</text>
+
+  <!-- Close / large screen -->
+  <rect x="182" y="278" width="316" height="9" rx="3" fill="none" stroke="#A32D2D" stroke-width="1"/>
+  <rect x="182" y="278" width="82" height="9" rx="3" fill="#E24B4A" opacity="0.7"/>
+  <rect x="366" y="278" width="132" height="9" rx="3" fill="#E24B4A" opacity="0.7"/>
+  <rect x="264" y="278" width="102" height="9" rx="3" fill="#888780" opacity="0.45"/>
+  <text font-family="sans-serif" font-size="12" x="340" y="272" text-anchor="middle" fill="#A32D2D">17" screen close up · exceeds cone</text>
+
+  <!-- Tick marks -->
+  <line x1="276" y1="174" x2="276" y2="192" stroke="#1D9E75" stroke-width="1" opacity="0.5"/>
+  <line x1="404" y1="174" x2="404" y2="192" stroke="#1D9E75" stroke-width="1" opacity="0.5"/>
+  <line x1="264" y1="274" x2="264" y2="292" stroke="#1D9E75" stroke-width="1" opacity="0.5"/>
+  <line x1="366" y1="274" x2="366" y2="292" stroke="#1D9E75" stroke-width="1" opacity="0.5"/>
+
+  <!-- Eye -->
+  <ellipse cx="340" cy="367" rx="13" ry="7" fill="none" stroke="#555" stroke-width="1.2"/>
+  <circle cx="340" cy="367" r="4" fill="#555" opacity="0.6"/>
+  <text font-family="sans-serif" font-size="11" x="340" y="382" text-anchor="middle" fill="#888">eye</text>
+
+  <!-- Legend -->
+  <rect x="480" y="50" width="10" height="8" rx="2" fill="#1D9E75" opacity="0.25"/>
+  <text font-family="sans-serif" font-size="11" x="496" y="58" fill="#555">comfortable zone</text>
+  <rect x="480" y="70" width="10" height="8" rx="2" fill="#E24B4A" opacity="0.7"/>
+  <text font-family="sans-serif" font-size="11" x="496" y="78" fill="#555">outside 40° cone</text>
+</svg>
+<p class="diagram-label">The 40° cone of comfortable vision and how screen size intersects it at typical viewing distances</p>
+</div>
+
+<h2>Design recommendations</h2>
+<p>Constrain the <strong>text and content column</strong> to roughly <strong>650–800px</strong>, centered, with intentional empty margins. The margins are not wasted space — they are an ergonomic decision that keeps reading within the comfortable cone.</p>
+
+<table>
+  <tr><th>Section type</th><th>Recommended approach</th></tr>
+  <tr><td>Hero / brand moment</td><td>Full width — fine</td></tr>
+  <tr><td>Services / pricing</td><td>Centered column, ~700px max</td></tr>
+  <tr><td>About / team</td><td>Centered column, ~700px max</td></tr>
+  <tr><td>Booking / checkout flow</td><td>Centered, narrower (~560px)</td></tr>
+  <tr><td>Gallery / portfolio</td><td>Full width — fine</td></tr>
+</table>
+
+<h2>Full-width layouts can still be correct</h2>
+<p>The rule applies to <strong>reading and decision-making contexts</strong>, not to visual or brand moments. A wide layout with a constrained text column is exactly the right pattern — wide canvas, narrow content zone.</p>
+<p>A good example: the <strong>Erella Hair Studio</strong> hero uses a full-width split layout, but the text block on the left is only ~400px wide — well within the cone. The right side is a single image, handled by peripheral vision with no reading required. This is the correct approach.</p>
+
+<ul>
+  <li>Wide visual composition → full width is valid</li>
+  <li>Text block within that composition → already constrained and comfortable</li>
+  <li>The problem only arises when <strong>text itself spans the full width</strong> on large screens</li>
+</ul>
+
+
+<h2>Real-world example: annotated site at 1920px</h2>
+<p>The following example shows a Wix business site hero section evaluated against the 40° rule at full desktop width, followed by two corrected layout alternatives.</p>
+
+<h3 style="font-size:15px;font-weight:700;margin:24px 0 10px;">Before — issues identified</h3>
+<div style="border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;margin-bottom:24px;">
+<svg width="100%" viewBox="0 0 1200 560" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="1200" height="32" fill="#ffffff"/>
+  <rect x="0" y="32" width="1200" height="0.5" fill="#e0e0e0"/>
+  <text font-family="sans-serif" font-size="11" fill="#444" x="16" y="21">Site Preview</text>
+  <text font-family="sans-serif" font-size="10" fill="#555" x="400" y="21" text-anchor="middle">Upgrade your website to remove Wix ads</text>
+  <rect x="560" y="9" width="80" height="16" rx="3" fill="#116dff"/>
+  <text font-family="sans-serif" font-size="9" fill="white" x="600" y="21" text-anchor="middle">Upgrade Now</text>
+  <text font-family="sans-serif" font-size="11" fill="#333" x="1080" y="21">Edit Site</text>
+  <rect x="1120" y="7" width="64" height="20" rx="3" fill="#116dff"/>
+  <text font-family="sans-serif" font-size="10" fill="white" x="1152" y="21" text-anchor="middle">Publish</text>
+  <rect x="0" y="32" width="1200" height="528" fill="#f5f0e8"/>
+  <text font-family="'Arial Black',sans-serif" font-size="88" font-weight="900" fill="#1a1a1a" x="24" y="168" letter-spacing="-2">Efficient Services</text>
+  <text font-family="'Arial Black',sans-serif" font-size="88" font-weight="900" fill="#1a1a1a" x="24" y="272" letter-spacing="-2">&amp; Solutions By The</text>
+  <text font-family="'Arial Black',sans-serif" font-size="88" font-weight="900" fill="#1a1a1a" x="24" y="376" letter-spacing="-2">Best Experts</text>
+  <text font-family="sans-serif" font-size="13" fill="#333" x="24" y="418">This is a space to welcome visitors to your site. As the first text readers encounter,</text>
+  <text font-family="sans-serif" font-size="13" fill="#333" x="24" y="436">this copy should clearly convey what your site is about.</text>
+  <ellipse cx="1112" cy="510" rx="64" ry="38" fill="#e8845a"/>
+  <text font-family="sans-serif" font-size="16" font-weight="700" fill="white" x="1112" y="506" text-anchor="middle">Book</text>
+  <text font-family="sans-serif" font-size="16" font-weight="700" fill="white" x="1112" y="524" text-anchor="middle">Now</text>
+  <rect x="680" y="32" width="520" height="528" fill="rgba(226,75,74,0.13)"/>
+  <rect x="0" y="32" width="680" height="528" fill="rgba(29,158,117,0.07)"/>
+  <line x1="680" y1="32" x2="680" y2="560" stroke="#1D9E75" stroke-width="2" stroke-dasharray="10 6"/>
+  <rect x="682" y="38" width="198" height="24" rx="4" fill="rgba(225,245,238,0.95)" stroke="#5DCAA5" stroke-width="1"/>
+  <text font-family="sans-serif" font-size="11" font-weight="700" fill="#085041" x="692" y="54">40° cone boundary</text>
+  <rect x="690" y="130" width="260" height="34" rx="17" fill="rgba(252,235,235,0.97)" stroke="#F09595" stroke-width="1.5"/>
+  <text font-family="sans-serif" font-size="12" font-weight="700" fill="#A32D2D" x="704" y="152">✕  headline exceeds 40° cone</text>
+  <line x1="690" y1="200" x2="830" y2="164" stroke="#E24B4A" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <circle cx="690" cy="200" r="4" fill="#E24B4A"/>
+  <rect x="24" y="490" width="210" height="30" rx="15" fill="rgba(225,245,238,0.97)" stroke="#5DCAA5" stroke-width="1.5"/>
+  <text font-family="sans-serif" font-size="12" font-weight="700" fill="#085041" x="38" y="510">✓  body text within zone</text>
+  <rect x="900" y="455" width="264" height="34" rx="17" fill="rgba(250,238,218,0.97)" stroke="#EF9F27" stroke-width="1.5"/>
+  <text font-family="sans-serif" font-size="12" font-weight="700" fill="#633806" x="914" y="477">⚠  CTA isolated — far from body text</text>
+  <line x1="1112" y1="455" x2="1112" y2="472" stroke="#BA7517" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <circle cx="1112" cy="472" r="4" fill="#BA7517"/>
+  <line x1="240" y1="543" x2="1048" y2="543" stroke="#BA7517" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <polygon points="1048,539 1058,543 1048,547" fill="#BA7517"/>
+  <polygon points="240,539 230,543 240,547" fill="#BA7517"/>
+  <rect x="570" y="531" width="160" height="20" rx="4" fill="rgba(250,238,218,0.95)"/>
+  <text font-family="sans-serif" font-size="10" font-weight="700" fill="#633806" x="650" y="545" text-anchor="middle">long scan distance</text>
+</svg>
+</div>
+
+<h3 style="font-size:15px;font-weight:700;margin:24px 0 10px;">Fix A — left-aligned, constrained column + image right</h3>
+<div style="border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;margin-bottom:24px;">
+<svg width="100%" viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="1200" height="28" fill="#1D9E75"/>
+  <text font-family="sans-serif" font-size="12" font-weight="700" fill="white" x="16" y="18">Fix A — left-aligned column, headline stays within cone, CTA close to body text</text>
+  <rect x="0" y="28" width="1200" height="32" fill="#ffffff"/>
+  <rect x="0" y="60" width="1200" height="0.5" fill="#e0e0e0"/>
+  <text font-family="sans-serif" font-size="11" fill="#444" x="16" y="49">Site Preview</text>
+  <text font-family="sans-serif" font-size="10" fill="#555" x="400" y="49" text-anchor="middle">Upgrade your website to remove Wix ads</text>
+  <rect x="560" y="37" width="80" height="16" rx="3" fill="#116dff"/>
+  <text font-family="sans-serif" font-size="9" fill="white" x="600" y="49" text-anchor="middle">Upgrade Now</text>
+  <text font-family="sans-serif" font-size="11" fill="#333" x="1080" y="49">Edit Site</text>
+  <rect x="1120" y="35" width="64" height="20" rx="3" fill="#116dff"/>
+  <text font-family="sans-serif" font-size="10" fill="white" x="1152" y="49" text-anchor="middle">Publish</text>
+  <rect x="0" y="60" width="1200" height="560" fill="#f5f0e8"/>
+  <rect x="0" y="60" width="680" height="560" fill="rgba(29,158,117,0.07)"/>
+  <rect x="680" y="60" width="520" height="560" fill="rgba(200,200,200,0.06)"/>
+  <line x1="680" y1="60" x2="680" y2="620" stroke="#1D9E75" stroke-width="2" stroke-dasharray="10 6"/>
+  <rect x="682" y="66" width="198" height="24" rx="4" fill="rgba(225,245,238,0.95)" stroke="#5DCAA5" stroke-width="1"/>
+  <text font-family="sans-serif" font-size="11" font-weight="700" fill="#085041" x="692" y="82">40° cone boundary</text>
+  <text font-family="'Arial Black',sans-serif" font-size="88" font-weight="900" fill="#1a1a1a" x="24" y="196" letter-spacing="-2">Efficient</text>
+  <text font-family="'Arial Black',sans-serif" font-size="88" font-weight="900" fill="#1a1a1a" x="24" y="300" letter-spacing="-2">Services &amp;</text>
+  <text font-family="'Arial Black',sans-serif" font-size="88" font-weight="900" fill="#1a1a1a" x="24" y="404" letter-spacing="-2">Solutions</text>
+  <text font-family="sans-serif" font-size="13" fill="#333" x="24" y="434">This is a space to welcome visitors to your site. As the first text</text>
+  <text font-family="sans-serif" font-size="13" fill="#333" x="24" y="452">readers encounter, this copy should clearly convey what your site is about.</text>
+  <rect x="24" y="470" width="148" height="48" rx="28" fill="#e8845a"/>
+  <text font-family="sans-serif" font-size="16" font-weight="700" fill="white" x="98" y="499" text-anchor="middle">Book Now</text>
+  <rect x="720" y="80" width="460" height="520" rx="8" fill="rgba(180,178,169,0.2)" stroke="rgba(180,178,169,0.4)" stroke-width="1" stroke-dasharray="6 4"/>
+  <text font-family="sans-serif" font-size="13" fill="#888" x="950" y="335" text-anchor="middle">image / video</text>
+  <rect x="430" y="170" width="220" height="30" rx="15" fill="rgba(225,245,238,0.97)" stroke="#5DCAA5" stroke-width="1.5"/>
+  <text font-family="sans-serif" font-size="12" font-weight="700" fill="#085041" x="444" y="190">✓  headline stays within zone</text>
+  <rect x="184" y="470" width="220" height="30" rx="15" fill="rgba(225,245,238,0.97)" stroke="#5DCAA5" stroke-width="1.5"/>
+  <text font-family="sans-serif" font-size="12" font-weight="700" fill="#085041" x="198" y="490">✓  CTA close to body text</text>
+  <line x1="24" y1="580" x2="172" y2="580" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <polygon points="172,576 182,580 172,584" fill="#1D9E75"/>
+  <polygon points="24,576 14,580 24,584" fill="#1D9E75"/>
+  <rect x="48" y="568" width="120" height="20" rx="4" fill="rgba(225,245,238,0.95)"/>
+  <text font-family="sans-serif" font-size="10" font-weight="700" fill="#085041" x="108" y="582" text-anchor="middle">short scan distance</text>
+</svg>
+</div>
+
+<h3 style="font-size:15px;font-weight:700;margin:24px 0 10px;">Fix B — centered column with symmetric margins</h3>
+<div style="border:1px solid #e8e8e8;border-radius:8px;overflow:hidden;margin-bottom:32px;">
+<svg width="100%" viewBox="0 0 1200 640" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="1200" height="28" fill="#534AB7"/>
+  <text font-family="sans-serif" font-size="12" font-weight="700" fill="white" x="16" y="18">Fix B — centered 700px column, symmetric ~250px margins on both sides</text>
+  <rect x="0" y="28" width="1200" height="32" fill="#ffffff"/>
+  <rect x="0" y="60" width="1200" height="0.5" fill="#e0e0e0"/>
+  <text font-family="sans-serif" font-size="11" fill="#444" x="16" y="49">Site Preview</text>
+  <text font-family="sans-serif" font-size="10" fill="#555" x="400" y="49" text-anchor="middle">Upgrade your website to remove Wix ads</text>
+  <rect x="560" y="37" width="80" height="16" rx="3" fill="#116dff"/>
+  <text font-family="sans-serif" font-size="9" fill="white" x="600" y="49" text-anchor="middle">Upgrade Now</text>
+  <text font-family="sans-serif" font-size="11" fill="#333" x="1080" y="49">Edit Site</text>
+  <rect x="1120" y="35" width="64" height="20" rx="3" fill="#116dff"/>
+  <text font-family="sans-serif" font-size="10" fill="white" x="1152" y="49" text-anchor="middle">Publish</text>
+  <rect x="0" y="60" width="1200" height="580" fill="#f5f0e8"/>
+  <rect x="0" y="60" width="250" height="580" fill="rgba(226,75,74,0.08)"/>
+  <rect x="950" y="60" width="250" height="580" fill="rgba(226,75,74,0.08)"/>
+  <rect x="250" y="60" width="700" height="580" fill="rgba(29,158,117,0.07)"/>
+  <line x1="250" y1="60" x2="250" y2="640" stroke="#1D9E75" stroke-width="2" stroke-dasharray="10 6"/>
+  <line x1="950" y1="60" x2="950" y2="640" stroke="#1D9E75" stroke-width="2" stroke-dasharray="10 6"/>
+  <rect x="252" y="66" width="152" height="22" rx="4" fill="rgba(225,245,238,0.95)" stroke="#5DCAA5" stroke-width="1"/>
+  <text font-family="sans-serif" font-size="10" font-weight="700" fill="#085041" x="260" y="81">40° left boundary</text>
+  <rect x="800" y="66" width="148" height="22" rx="4" fill="rgba(225,245,238,0.95)" stroke="#5DCAA5" stroke-width="1"/>
+  <text font-family="sans-serif" font-size="10" font-weight="700" fill="#085041" x="808" y="81">40° right boundary</text>
+  <text font-family="'Arial Black',sans-serif" font-size="74" font-weight="900" fill="#1a1a1a" x="600" y="190" text-anchor="middle" letter-spacing="-2">Efficient Services</text>
+  <text font-family="'Arial Black',sans-serif" font-size="74" font-weight="900" fill="#1a1a1a" x="600" y="278" text-anchor="middle" letter-spacing="-2">&amp; Solutions By</text>
+  <text font-family="'Arial Black',sans-serif" font-size="74" font-weight="900" fill="#1a1a1a" x="600" y="366" text-anchor="middle" letter-spacing="-2">The Best Experts</text>
+  <text font-family="sans-serif" font-size="13" fill="#555" x="600" y="406" text-anchor="middle">This is a space to welcome visitors to your site. As the first text readers encounter,</text>
+  <text font-family="sans-serif" font-size="13" fill="#555" x="600" y="424" text-anchor="middle">this copy should clearly convey what your site is about.</text>
+  <rect x="466" y="448" width="160" height="44" rx="28" fill="#1a1a1a"/>
+  <text font-family="sans-serif" font-size="14" font-weight="700" fill="white" x="546" y="475" text-anchor="middle">Book My Session</text>
+  <rect x="642" y="448" width="164" height="44" rx="28" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+  <text font-family="sans-serif" font-size="14" font-weight="700" fill="#1a1a1a" x="724" y="475" text-anchor="middle">Explore Services</text>
+  <text font-family="sans-serif" font-size="11" fill="#bbb" x="125" y="350" text-anchor="middle">empty margin</text>
+  <text font-family="sans-serif" font-size="11" fill="#bbb" x="1075" y="350" text-anchor="middle">empty margin</text>
+  <line x1="250" y1="614" x2="950" y2="614" stroke="#1D9E75" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <polygon points="950,610 960,614 950,618" fill="#1D9E75"/>
+  <polygon points="250,610 240,614 250,618" fill="#1D9E75"/>
+  <text font-family="sans-serif" font-size="11" font-weight="700" fill="#085041" x="600" y="632" text-anchor="middle">700px content column — centered</text>
+  <rect x="962" y="180" width="222" height="30" rx="15" fill="rgba(225,245,238,0.97)" stroke="#5DCAA5" stroke-width="1.5"/>
+  <text font-family="sans-serif" font-size="12" font-weight="700" fill="#085041" x="976" y="200">✓  headline within cone</text>
+  <rect x="962" y="440" width="222" height="30" rx="15" fill="rgba(225,245,238,0.97)" stroke="#5DCAA5" stroke-width="1.5"/>
+  <text font-family="sans-serif" font-size="12" font-weight="700" fill="#085041" x="976" y="460">✓  CTAs adjacent — no scan jump</text>
+</svg>
+</div>
+
+<div class="sources">
+  <h2>Further reading & sources</h2>
+  <ul>
+    <li>
+      <a href="https://eurekaergonomic.com/blogs/eureka-ergonomic-blog/ultrawide-monitor-ergonomics-setup" target="_blank">Ultrawide Monitor Ergonomics — Eureka Ergonomic</a><br>
+      <span style="color:#888;font-size:12px;">On the ±30° comfortable viewing arc and why screen width forces head turning beyond the comfort zone. References ISO 9241-5.</span>
+    </li>
+    <li>
+      <a href="https://www.osha.gov/etools/computer-workstations/components/monitors" target="_blank">Computer Workstations: Monitors — OSHA</a><br>
+      <span style="color:#888;font-size:12px;">Official ergonomics guidelines on viewing distance (50–100 cm) and screen positioning to avoid eye strain.</span>
+    </li>
+    <li>
+      <a href="https://lookaway.com/blog/2025/09/11/the-ideal-viewing-distance-for-monitors-and-screens/" target="_blank">The Ideal Viewing Distance for Monitors — LookAway</a><br>
+      <span style="color:#888;font-size:12px;">Covers the 30–40° horizontal FOV target for focused reading and ISO 9241 character-legibility guidance.</span>
+    </li>
+    <li>
+      <a href="https://www.smashingmagazine.com/2009/03/10-principles-for-readable-web-typography/" target="_blank">10 Principles for Readable Web Typography — Smashing Magazine</a><br>
+      <span style="color:#888;font-size:12px;">Classic reference on line length, white space, hierarchy and how they affect reading comfort on screen.</span>
+    </li>
+    <li>
+      <a href="https://www.nature.com/articles/s41598-019-49051-x" target="_blank">Typographic Variables & Eye Movements in Webpage Reading — Scientific Reports (Nature)</a><br>
+      <span style="color:#888;font-size:12px;">Peer-reviewed research on how layout and typography variables measurably affect eye movement patterns and reading performance.</span>
+    </li>
+  </ul>
+</div>
+
+</body>
+</html>
